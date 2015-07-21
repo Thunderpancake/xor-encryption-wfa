@@ -7,28 +7,31 @@ namespace XorEncryptionWfa
 {
     public class Crypto
     {
+        public IHash Hash { get; set; }
         public string Path { get; set; }
         private byte[] Key { get; set; }
         private Encoding Encoding { get; set; }
 
-        public Crypto(string key, Encoding encoding)
+        /// <summary>
+        /// Constructors to initialize a new instance of the Crypto class
+        /// </summary>
+        public Crypto(string key, Encoding encoding, IHash hash)
         {
             this.Encoding = encoding;
             this.Key = Encoding.GetBytes(key).Where(b => b != 0).ToArray();
         }
 
         public Crypto(string key)
-            : this(key, Encoding.UTF8)
+            : this(key, Encoding.UTF8, IHash)
         {
             return;
         }
 
-        public Crypto(string key, string path)
-            : this(key, Encoding.UTF8)
-        {
-            this.Path = path;
-        }
-
+        /// <summary>
+        /// Encrypts the plain text with a XOR calcuation into Base64
+        /// </summary>
+        /// <param name="plainText">The unencrypted plain text passed in</param>
+        /// <returns></returns>
         public string Encrypt(string plainText)
         {
             int i = 0;
@@ -37,6 +40,11 @@ namespace XorEncryptionWfa
             return cipherText;
         }
 
+        /// <summary>
+        /// Decrypts the cipher text by converting back from base 64, performing the XOR operation, and converts back to the proper Encoding
+        /// </summary>
+        /// <param name="cipherText">XOR encrypted cipher text.</param>
+        /// <returns></returns>
         public string Decrypt(string cipherText)
         {
             int i = 0;
