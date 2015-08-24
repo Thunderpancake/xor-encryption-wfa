@@ -72,7 +72,8 @@ namespace XorEncryptionWfa
                             new StreamWriter(Path.Combine(Path.GetDirectoryName(FilePathBox.Text),
                                     Path.GetFileNameWithoutExtension(FilePathBox.Text) + "Encrypted" + ".txt")))
                     {
-                        sw.WriteLine(crypto.Encrypt(sr.ReadToEnd()));
+                        sw.Write(crypto.Encrypt(sr.ReadToEnd()));
+                        //sw.Write(crypto.GetHash(FilePathBox.Text));
                     }
                 }
             }
