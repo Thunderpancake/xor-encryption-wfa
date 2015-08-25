@@ -64,18 +64,22 @@ namespace XorEncryptionWfa
             }
             else
             {
+                ResultsTextBox.AppendText("Encrypting...\n");
                 var crypto = new Crypto(KeyBoxFile.Text);
+                string fileContents;
                 using (StreamReader sr = new StreamReader(FilePathBox.Text))
                 {
-                    using (
+                    fileContents = sr.ReadToEnd();
+                }
+                using (
                         StreamWriter sw =
                             new StreamWriter(Path.Combine(Path.GetDirectoryName(FilePathBox.Text),
                                     Path.GetFileNameWithoutExtension(FilePathBox.Text) + "Encrypted" + ".txt")))
-                    {
-                        sw.Write(crypto.Encrypt(sr.ReadToEnd()));
-                        //sw.Write(crypto.GetHash(FilePathBox.Text));
-                    }
+                {
+                    sw.Write(crypto.Encrypt(fileContents));
+                    sw.Write(crypto.GenerateHash(fileContents));
                 }
+                ResultsTextBox.AppendText("Encryption complete.\n");
             }
         }
 
@@ -87,17 +91,23 @@ namespace XorEncryptionWfa
             }
             else
             {
+                ResultsTextBox.AppendText("Decrypting...\n");
                 var crypto = new Crypto(KeyBoxFile.Text);
+                string fileContents;
                 using (StreamReader sr = new StreamReader(FilePathBox.Text))
                 {
-                    using (
+                    fileContents = sr.ReadToEnd();
+                }
+                ExtractedHashBox.Text = crypto.ExtractHash(fileContents);
+                fileContents = fileContents.Substring(0, fileContents.Length - 24);
+                using (
                         StreamWriter sw =
                             new StreamWriter(Path.Combine(Path.GetDirectoryName(FilePathBox.Text),
                                     Path.GetFileNameWithoutExtension(FilePathBox.Text) + "Decrypted" + ".txt")))
-                    {
-                        sw.WriteLine(crypto.Decrypt(sr.ReadToEnd()));
-                    }
+                {
+                    sw.Write(crypto.Decrypt(fileContents));
                 }
+                ResultsTextBox.AppendText("Decryption complete.\n");
             }
         }
     }

@@ -38,11 +38,8 @@ namespace XorEncryptionWfa
         public string Encrypt(string plainText)
         {
             int i = 0;
-            byte[] plainTextBytes = Encoding.GetBytes(plainText);
             byte[] octets = Encoding.GetBytes(plainText).Select(b => (byte)(b ^ Key[(++i) % Key.Length])).ToArray();
             string cipherText = Convert.ToBase64String(octets);
-            string hashBase64 = Convert.ToBase64String(HashAlgorithm.ComputeHash(plainTextBytes));
-            cipherText += hashBase64;
             return cipherText;
         }
 
@@ -62,23 +59,18 @@ namespace XorEncryptionWfa
         /// <summary>
         /// Calculates the hash of the text file before encrypting it.
         /// </summary>
-        /// <param name="filePath">The file path of the file to be processed.</param>
+        /// <param name="fileContents">The file path of the file to be processed.</param>
         /// <returns></returns>
-        public string GetHash(string filePath)
+        public string GenerateHash(string fileContents)
         {
-            using (var stream = File.OpenRead(filePath))
-            {
-                return BitConverter.ToString(HashAlgorithm.ComputeHash(stream)).Replace("-", "").ToLower();
-            }
+            byte[] fileContentsBytes = Encoding.GetBytes(fileContents);
+            string hashBase64 = Convert.ToBase64String(HashAlgorithm.ComputeHash(fileContentsBytes));
+            return hashBase64;
         }
 
-        public string ExtractHash(string filePath)
+        public string ExtractHash(string fileContents)
         {
-            using (var sr = new StreamReader(filePath))
-            {
-                sr.BaseStream.Seek(-32, SeekOrigin.End);
-                return sr.ReadLine();
-            }
+            return fileContents.Substring(fileContents.Length - 24);
         }
     }
 }

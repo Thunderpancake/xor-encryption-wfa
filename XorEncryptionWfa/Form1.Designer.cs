@@ -38,6 +38,8 @@
             this.DecryptButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.HashLabel = new System.Windows.Forms.Label();
+            this.ExtractedHashBox = new System.Windows.Forms.TextBox();
             this.KeyBoxFile = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.EncryptFileButton = new System.Windows.Forms.Button();
@@ -45,10 +47,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.FilePathBox = new System.Windows.Forms.TextBox();
             this.BrowseButton = new System.Windows.Forms.Button();
-            this.ExtractedHashBox = new System.Windows.Forms.TextBox();
-            this.HashLabel = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.ResultsTextBox = new System.Windows.Forms.RichTextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // InputLabel
@@ -84,7 +87,7 @@
             // InputBox
             // 
             this.InputBox.Location = new System.Drawing.Point(46, 25);
-            this.InputBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.InputBox.Margin = new System.Windows.Forms.Padding(2);
             this.InputBox.Name = "InputBox";
             this.InputBox.Size = new System.Drawing.Size(156, 20);
             this.InputBox.TabIndex = 3;
@@ -92,7 +95,7 @@
             // KeyBox
             // 
             this.KeyBox.Location = new System.Drawing.Point(46, 51);
-            this.KeyBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.KeyBox.Margin = new System.Windows.Forms.Padding(2);
             this.KeyBox.Name = "KeyBox";
             this.KeyBox.Size = new System.Drawing.Size(156, 20);
             this.KeyBox.TabIndex = 4;
@@ -100,7 +103,7 @@
             // OutputBox
             // 
             this.OutputBox.Location = new System.Drawing.Point(46, 77);
-            this.OutputBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.OutputBox.Margin = new System.Windows.Forms.Padding(2);
             this.OutputBox.Name = "OutputBox";
             this.OutputBox.Size = new System.Drawing.Size(156, 20);
             this.OutputBox.TabIndex = 5;
@@ -108,7 +111,7 @@
             // EncryptButton
             // 
             this.EncryptButton.Location = new System.Drawing.Point(224, 20);
-            this.EncryptButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.EncryptButton.Margin = new System.Windows.Forms.Padding(2);
             this.EncryptButton.Name = "EncryptButton";
             this.EncryptButton.Size = new System.Drawing.Size(56, 23);
             this.EncryptButton.TabIndex = 6;
@@ -119,7 +122,7 @@
             // DecryptButton
             // 
             this.DecryptButton.Location = new System.Drawing.Point(224, 51);
-            this.DecryptButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.DecryptButton.Margin = new System.Windows.Forms.Padding(2);
             this.DecryptButton.Name = "DecryptButton";
             this.DecryptButton.Size = new System.Drawing.Size(56, 23);
             this.DecryptButton.TabIndex = 7;
@@ -138,9 +141,9 @@
             this.groupBox1.Controls.Add(this.KeyBox);
             this.groupBox1.Controls.Add(this.InputBox);
             this.groupBox1.Location = new System.Drawing.Point(9, 10);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(307, 111);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
@@ -158,18 +161,36 @@
             this.groupBox2.Controls.Add(this.FilePathBox);
             this.groupBox2.Controls.Add(this.BrowseButton);
             this.groupBox2.Location = new System.Drawing.Point(9, 126);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox2.Size = new System.Drawing.Size(307, 111);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "groupBox2";
             // 
+            // HashLabel
+            // 
+            this.HashLabel.AutoSize = true;
+            this.HashLabel.Location = new System.Drawing.Point(14, 70);
+            this.HashLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.HashLabel.Name = "HashLabel";
+            this.HashLabel.Size = new System.Drawing.Size(32, 13);
+            this.HashLabel.TabIndex = 14;
+            this.HashLabel.Text = "Hash";
+            // 
+            // ExtractedHashBox
+            // 
+            this.ExtractedHashBox.Location = new System.Drawing.Point(46, 70);
+            this.ExtractedHashBox.Margin = new System.Windows.Forms.Padding(2);
+            this.ExtractedHashBox.Name = "ExtractedHashBox";
+            this.ExtractedHashBox.Size = new System.Drawing.Size(156, 20);
+            this.ExtractedHashBox.TabIndex = 13;
+            // 
             // KeyBoxFile
             // 
             this.KeyBoxFile.Location = new System.Drawing.Point(46, 46);
-            this.KeyBoxFile.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.KeyBoxFile.Margin = new System.Windows.Forms.Padding(2);
             this.KeyBoxFile.Name = "KeyBoxFile";
             this.KeyBoxFile.Size = new System.Drawing.Size(156, 20);
             this.KeyBoxFile.TabIndex = 13;
@@ -187,7 +208,7 @@
             // EncryptFileButton
             // 
             this.EncryptFileButton.Location = new System.Drawing.Point(224, 47);
-            this.EncryptFileButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.EncryptFileButton.Margin = new System.Windows.Forms.Padding(2);
             this.EncryptFileButton.Name = "EncryptFileButton";
             this.EncryptFileButton.Size = new System.Drawing.Size(56, 23);
             this.EncryptFileButton.TabIndex = 9;
@@ -198,7 +219,7 @@
             // DecryptFileButton
             // 
             this.DecryptFileButton.Location = new System.Drawing.Point(224, 77);
-            this.DecryptFileButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.DecryptFileButton.Margin = new System.Windows.Forms.Padding(2);
             this.DecryptFileButton.Name = "DecryptFileButton";
             this.DecryptFileButton.Size = new System.Drawing.Size(56, 23);
             this.DecryptFileButton.TabIndex = 10;
@@ -219,7 +240,7 @@
             // FilePathBox
             // 
             this.FilePathBox.Location = new System.Drawing.Point(46, 22);
-            this.FilePathBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.FilePathBox.Margin = new System.Windows.Forms.Padding(2);
             this.FilePathBox.Name = "FilePathBox";
             this.FilePathBox.Size = new System.Drawing.Size(156, 20);
             this.FilePathBox.TabIndex = 9;
@@ -227,7 +248,7 @@
             // BrowseButton
             // 
             this.BrowseButton.Location = new System.Drawing.Point(224, 17);
-            this.BrowseButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BrowseButton.Margin = new System.Windows.Forms.Padding(2);
             this.BrowseButton.Name = "BrowseButton";
             this.BrowseButton.Size = new System.Drawing.Size(56, 23);
             this.BrowseButton.TabIndex = 10;
@@ -235,38 +256,42 @@
             this.BrowseButton.UseVisualStyleBackColor = true;
             this.BrowseButton.Click += new System.EventHandler(this.BrowseButton_Click);
             // 
-            // ExtractedHashBox
+            // groupBox3
             // 
-            this.ExtractedHashBox.Location = new System.Drawing.Point(46, 70);
-            this.ExtractedHashBox.Margin = new System.Windows.Forms.Padding(2);
-            this.ExtractedHashBox.Name = "ExtractedHashBox";
-            this.ExtractedHashBox.Size = new System.Drawing.Size(156, 20);
-            this.ExtractedHashBox.TabIndex = 13;
+            this.groupBox3.Controls.Add(this.ResultsTextBox);
+            this.groupBox3.Location = new System.Drawing.Point(333, 10);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox3.Size = new System.Drawing.Size(307, 227);
+            this.groupBox3.TabIndex = 9;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "groupBox3";
             // 
-            // HashLabel
+            // ResultsTextBox
             // 
-            this.HashLabel.AutoSize = true;
-            this.HashLabel.Location = new System.Drawing.Point(14, 70);
-            this.HashLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.HashLabel.Name = "HashLabel";
-            this.HashLabel.Size = new System.Drawing.Size(32, 13);
-            this.HashLabel.TabIndex = 14;
-            this.HashLabel.Text = "Hash";
+            this.ResultsTextBox.Location = new System.Drawing.Point(5, 18);
+            this.ResultsTextBox.Name = "ResultsTextBox";
+            this.ResultsTextBox.Size = new System.Drawing.Size(297, 197);
+            this.ResultsTextBox.TabIndex = 0;
+            this.ResultsTextBox.Text = "";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(374, 259);
+            this.ClientSize = new System.Drawing.Size(680, 259);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "EncryptionUtility";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -292,6 +317,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label HashLabel;
         private System.Windows.Forms.TextBox ExtractedHashBox;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.RichTextBox ResultsTextBox;
     }
 }
 
