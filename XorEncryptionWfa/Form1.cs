@@ -94,12 +94,16 @@ namespace XorEncryptionWfa
                 ResultsTextBox.AppendText("Decrypting...\n");
                 var crypto = new Crypto(KeyBoxFile.Text);
                 string fileContents;
+                string extractedHash;
+                string decryptedHash;
                 using (StreamReader sr = new StreamReader(FilePathBox.Text))
                 {
                     fileContents = sr.ReadToEnd();
                 }
                 ExtractedHashBox.Text = crypto.ExtractHash(fileContents);
+                extractedHash = crypto.ExtractHash(fileContents);
                 fileContents = fileContents.Substring(0, fileContents.Length - 24);
+                decryptedHash = crypto.GenerateHash(fileContents);
                 using (
                         StreamWriter sw =
                             new StreamWriter(Path.Combine(Path.GetDirectoryName(FilePathBox.Text),
@@ -108,6 +112,16 @@ namespace XorEncryptionWfa
                     sw.Write(crypto.Decrypt(fileContents));
                 }
                 ResultsTextBox.AppendText("Decryption complete.\n");
+                ResultsTextBox.AppendText(string.Format("Decrypted Hash: {0}\n", decryptedHash));
+                ResultsTextBox.AppendText(string.Format("Extracted Hash: {0}\n", extractedHash));
+                if (crypto.VerifyHash(decryptedHash, extractedHash))
+                {
+                    ResultsTextBox.AppendText("Hashes match!  Successful decryption.\n");
+                }
+                else
+                {
+                    ResultsTextBox.AppendText("Hashes do not match!  Unsuccessful decryption.\n");
+                }
             }
         }
     }

@@ -59,7 +59,7 @@ namespace XorEncryptionWfa
         /// <summary>
         /// Calculates the hash of the text file before encrypting it.
         /// </summary>
-        /// <param name="fileContents">The file path of the file to be processed.</param>
+        /// <param name="fileContents">The contents of the file to be processed.</param>
         /// <returns></returns>
         public string GenerateHash(string fileContents)
         {
@@ -68,9 +68,19 @@ namespace XorEncryptionWfa
             return hashBase64;
         }
 
+        /// <summary>
+        /// Extracts the embedded hash from the encrypted file that was generated on the orignal file before encryption
+        /// </summary>
+        /// <param name="fileContents">The contents of the encrypted file.</param>
+        /// <returns></returns>
         public string ExtractHash(string fileContents)
         {
             return fileContents.Substring(fileContents.Length - 24);
+        }
+
+        public bool VerifyHash(string decryptedHash, string originalHash)
+        {
+            return decryptedHash == originalHash;
         }
     }
 }
