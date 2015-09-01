@@ -75,7 +75,11 @@ namespace XorEncryptionWfa
         /// <returns></returns>
         public string ExtractHash(string fileContents)
         {
-            return fileContents.Substring(fileContents.Length - 24);
+            string hashBase64 = fileContents.Substring(fileContents.Length - 24);
+            byte[] hashBase64Bytes = Convert.FromBase64String(hashBase64);
+            string hash = Encoding.GetString(hashBase64Bytes);
+            return hash;
+            //return fileContents.Substring(fileContents.Length - 24);
         }
 
         public bool VerifyHash(string decryptedHash, string originalHash)
