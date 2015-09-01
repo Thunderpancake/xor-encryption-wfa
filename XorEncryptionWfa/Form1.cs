@@ -47,7 +47,7 @@ namespace XorEncryptionWfa
         private void BrowseButton_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.InitialDirectory = @"C:\";
+            ofd.InitialDirectory = @"C:\Desktop";
             ofd.Filter = @"Text Files|*.txt|All|*.*";
             DialogResult dr = ofd.ShowDialog();
             if (dr == DialogResult.OK)
@@ -77,7 +77,7 @@ namespace XorEncryptionWfa
                                     Path.GetFileNameWithoutExtension(FilePathBox.Text) + "Encrypted" + ".txt")))
                 {
                     sw.Write(crypto.Encrypt(fileContents));
-                    sw.Write(crypto.GenerateHash(fileContents));
+                    sw.Write(crypto.GenerateBase64Hash(fileContents));
                 }
                 ResultsTextBox.AppendText("Encryption complete.\n");
             }

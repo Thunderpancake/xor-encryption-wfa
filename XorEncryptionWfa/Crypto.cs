@@ -61,11 +61,17 @@ namespace XorEncryptionWfa
         /// </summary>
         /// <param name="fileContents">The contents of the file to be processed.</param>
         /// <returns></returns>
-        public string GenerateHash(string fileContents)
+        public string GenerateBase64Hash(string fileContents)
         {
             byte[] fileContentsBytes = Encoding.GetBytes(fileContents);
             string hashBase64 = Convert.ToBase64String(HashAlgorithm.ComputeHash(fileContentsBytes));
             return hashBase64;
+        }
+
+        public string GenerateHash(string fileContents)
+        {
+            byte[] fileContentsBytes = Encoding.GetBytes(fileContents);
+            return Encoding.GetString(HashAlgorithm.ComputeHash(fileContentsBytes));
         }
 
         /// <summary>
@@ -77,7 +83,7 @@ namespace XorEncryptionWfa
         {
             string hashBase64 = fileContents.Substring(fileContents.Length - 24);
             byte[] hashBase64Bytes = Convert.FromBase64String(hashBase64);
-            string hash = Encoding.GetString(hashBase64Bytes);
+            string hash = Encoding.UTF8.GetString(hashBase64Bytes);
             return hash;
             //return fileContents.Substring(fileContents.Length - 24);
         }
