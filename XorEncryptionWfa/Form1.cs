@@ -47,7 +47,7 @@ namespace XorEncryptionWfa
         private void BrowseButton_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.InitialDirectory = @"C:\Desktop";
+            ofd.InitialDirectory = @"C:\Users\Ryan\Desktop\";
             ofd.Filter = @"Text Files|*.txt|All|*.*";
             DialogResult dr = ofd.ShowDialog();
             if (dr == DialogResult.OK)
@@ -104,10 +104,11 @@ namespace XorEncryptionWfa
                 extractedHash = crypto.ExtractHash(fileContents);
                 fileContents = fileContents.Substring(0, fileContents.Length - 24);
                 decryptedHash = crypto.GenerateHash(fileContents);
+                var utf8WithBom = new UTF8Encoding(true);
                 using (
                         StreamWriter sw =
                             new StreamWriter(Path.Combine(Path.GetDirectoryName(FilePathBox.Text),
-                                    Path.GetFileNameWithoutExtension(FilePathBox.Text) + "Decrypted" + ".txt")))
+                                    Path.GetFileNameWithoutExtension(FilePathBox.Text) + "Decrypted" + ".txt"), false, utf8WithBom))
                 {
                     sw.Write(crypto.Decrypt(fileContents));
                 }
