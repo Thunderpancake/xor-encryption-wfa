@@ -58,7 +58,8 @@ namespace XorEncryptionWfa
         public string GenerateBase64Hash(string fileContents)
         {
             byte[] fileContentsBytes = Encoding.GetBytes(fileContents);
-            string hashBase64 = Convert.ToBase64String(HashAlgorithm.ComputeHash(fileContentsBytes));
+            //string hashBase64 = Convert.ToBase64String(HashAlgorithm.ComputeHash(fileContentsBytes));
+            string hashBase64 = BitConverter.ToString(HashAlgorithm.ComputeHash(fileContentsBytes)).Replace("-", "");
             return hashBase64;
         }
 
