@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace XorEncryptionWfa
@@ -77,7 +72,7 @@ namespace XorEncryptionWfa
                                     Path.GetFileNameWithoutExtension(FilePathBox.Text) + "Encrypted" + ".txt")))
                 {
                     sw.Write(crypto.Encrypt(fileContents));
-                    sw.Write(crypto.GenerateBase64Hash(fileContents));
+                    sw.Write(Hasher.GenerateBase64Hash(MD5.Create(), fileContents));
                 }
                 ResultsTextBox.AppendText("Encryption complete.\n");
             }
@@ -100,10 +95,9 @@ namespace XorEncryptionWfa
                 {
                     fileContents = sr.ReadToEnd();
                 }
-                ExtractedHashBox.Text = crypto.ExtractHash(fileContents);
-                extractedHash = crypto.ExtractHash(fileContents);
+                extractedHash = Hasher.ExtractHash(fileContents);
+                ExtractedHashBox.Text = extractedHash;
                 fileContents = fileContents.Substring(0, fileContents.Length - 24);
-                decryptedHash = crypto.GenerateHash(fileContents);
                 var utf8WithBom = new UTF8Encoding(true);
                 using (
                         StreamWriter sw =
@@ -112,10 +106,15 @@ namespace XorEncryptionWfa
                 {
                     sw.Write(crypto.Decrypt(fileContents));
                 }
+                using (StreamReader sr = new StreamReader(Path.Combine(Path.GetDirectoryName(FilePathBox.Text), Path.GetFileNameWithoutExtension(FilePathBox.Text) + "Decrypted" + ".txt")))
+                {
+                    fileContents = sr.ReadToEnd();
+                }
+                decryptedHash = Hasher.GenerateBase64Hash(MD5.Create(), fileContents);
                 ResultsTextBox.AppendText("Decryption complete.\n");
                 ResultsTextBox.AppendText(string.Format("Decrypted Hash: {0}\n", decryptedHash));
                 ResultsTextBox.AppendText(string.Format("Extracted Hash: {0}\n", extractedHash));
-                if (crypto.VerifyHash(decryptedHash, extractedHash))
+                if (Hasher.VerifyHash(decryptedHash, extractedHash))
                 {
                     ResultsTextBox.AppendText("Hashes match!  Successful decryption.\n");
                 }
